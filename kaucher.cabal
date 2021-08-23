@@ -1,0 +1,38 @@
+name:                kaucher
+version:             0.1.0.0
+-- synopsis:
+-- description:
+homepage:            https://github.com/githubuser/kaucher#readme
+license:             BSD3
+license-file:        LICENSE
+author:              Author name here
+maintainer:          example@example.com
+copyright:           2021 Author name here
+category:            Web
+build-type:          Simple
+cabal-version:       >=1.10
+extra-source-files:  README.md
+
+library
+  hs-source-dirs: src
+
+  exposed-modules:
+    Numeric.Interval
+    Numeric.Interval.Exception
+    Numeric.Interval.Internal
+    Numeric.Interval.Kaucher
+    Numeric.Interval.NonEmpty
+    Numeric.Interval.NonEmpty.Internal
+
+  build-depends:
+    array          >= 0.3   && < 0.6,
+    base           >= 4     && < 5,
+    distributive   >= 0.2   && < 1
+
+  if impl(ghc >=7.4)
+    build-depends: ghc-prim
+
+  if !impl(ghc >=8.0)
+    build-depends: semigroups >=0.11 && <1
+
+  ghc-options:     -Wall -O2  
