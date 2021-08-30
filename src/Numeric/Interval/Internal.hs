@@ -790,14 +790,14 @@ y |^| 1        = y
   | a <  0 && b <  0 = I (b ^ k) (a ^ k)
   | a <  0 && b >= 0 = I 0 (max (a ^ k) (b ^ k))
   | a >= 0 && b <  0 = I (max (a ^ k) (b ^ k)) 0
-{-# SPECIALIZE (|^|) :: Interval Double -> Int -> Interval Double #-}
+{-# INLINE (|^|) #-}
   
 (|^^|) :: (Fractional a, Ord a, Integral b) => Interval a -> b -> Interval a  
 Empty |^^| _ = Empty
 y |^^| k
   | k < 0     = recip (y |^| (-k))
   | otherwise = y |^| k
-{-# SPECIALIZE (|^^|) :: Interval Double -> Int -> Interval Double #-}
+{-# INLINE (|^^|) #-}
 infixr 8 |^|
 infixr 8 |^^|
 
