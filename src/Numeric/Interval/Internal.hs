@@ -581,12 +581,12 @@ instance (Fractional a, Ord a) => Fractional (Interval a) where
   -- TODO: check isNegativeZero properly
   _ / Empty = Empty
   x@(I a b) / y@(I a' b')
-    | (a' > 0 && b' < 0) || (a' < 0 && b' > 0) || (a' == 0 && b' == 0) = nanValue
+    | (a' > 0 && b' < 0) || (a' < 0 && b' > 0) || (a' == 0 && b' == 0) = Empty
     | a >= 0 && b >= 0    = case1div
     | a >= 0 && b <  0    = case2div
     | a <  0 && b >= 0    = case3div
     | a <  0 && b <  0    = case4div
-    | 0 `elem` (proper y) = nanValue   
+    | 0 `elem` (proper y) = Empty
     where
       case1div | a' >  0 && b' >  0 = I (a/b')      (b/a')
                | a' <  0 && b' <  0 = I (b/b')      (a/a')
