@@ -727,6 +727,10 @@ instance (RealFloat a, Ord a) => Floating (Interval a) where
       ...
       (if b >= 1 then posInfinity else atanh b)
   {-# INLINE atanh #-}
+  sqrt Empty = Empty
+  sqrt x@(I a b)
+    | a < 0 || b < 0 = Empty 
+    | otherwise      = x ** 0.5
 
 -- | dualize a function 
 dualize :: (Interval a -> Interval a) -> Interval a -> Interval a
